@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.os.Debug;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -11,7 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.mbms.FileInfo;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.Scroller;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -25,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     final int REQUEST_ID_READ_WRITE_PERMISSION = 99;
+    //ScrollView scrollView01 = findViewById(R.id.scrollView);
+   ImageView imageView01 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         askPermissonForAccessFile();
+
+        imageView01 = findViewById(R.id.imageView);
 
         //String url = "https://i.pinimg.com/originals/f5/05/ec/f505ec4a493959f044923174e92d7b79.jpg";
 /*
@@ -92,12 +100,26 @@ public class MainActivity extends AppCompatActivity {
         File f = new File(path02);
         File file[] = f.listFiles();
 
-        for(int i=0;i<file.length;++i)
+        String tempPath = "";
+
+
+        for(int i=1;i<file.length;++i)
         {
-            String tempPath =file[i].getAbsolutePath().toString();
-            Log.d("filename",tempPath);
+            // in ra tat ca cac ten cua file trong thu muc GOGOvideos:
+            tempPath = file[i].getAbsolutePath().toString();
+           // Log.d("filename",tempPath);
+
+            Glide.with(this)
+                    .load(tempPath)
+                    .placeholder(R.drawable.image_loading)
+                    .error(R.drawable.image_break)
+                    .into(imageView01);
 
         }
+
+
+
+
 
     }
 
