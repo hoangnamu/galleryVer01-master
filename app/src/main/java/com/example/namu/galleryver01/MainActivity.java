@@ -10,12 +10,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.mbms.FileInfo;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.io.File;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -85,12 +89,18 @@ public class MainActivity extends AppCompatActivity {
 
         String path02 = Environment.getExternalStorageDirectory().toString()+"/GOGOvideos";
 
-        //File f = new File(path02);
-        //File file[] = f.listFiles();
+        File f = new File(path02);
+        File file[] = f.listFiles();
 
+        for(int i=0;i<file.length;++i)
+        {
+            String tempPath =file[i].getAbsolutePath().toString();
+            Log.d("filename",tempPath);
 
+        }
 
     }
+
 
     private void askPermissonForAccessFile() {
         // Với Android Level >= 23 bạn phải hỏi người dùng cho phép đọc/ghi dữ liệu vào thiết bị.
